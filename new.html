@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="hi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>LCG - Team Page</title>
+  <style>
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#06b6d4;
+      --text:#e6eef8;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      background: radial-gradient(ellipse at center, rgba(6,182,212,0.06) 0%, rgba(6,182,212,0.02) 40%, transparent 70%), var(--bg);
+      color:var(--text);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px;
+    }
+    .watermark{
+      position:fixed;
+      inset:0;
+      z-index:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+      opacity:0.06;
+    }
+    .watermark svg{width:80vmin;height:80vmin;}
+
+    .container{
+      position:relative;
+      z-index:1;
+      width:100%;
+      max-width:900px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:14px;
+      padding:28px;
+      box-shadow: 0 10px 30px rgba(2,6,23,0.6);
+      backdrop-filter: blur(6px);
+      border:1px solid rgba(255,255,255,0.04);
+    }
+
+    header{
+      display:flex;
+      gap:16px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .logo-badge{
+      width:72px;height:72px;border-radius:12px;
+      display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(135deg,var(--accent),#7c3aed);
+      color:#00202a;font-weight:800;font-size:22px;
+      box-shadow: 0 6px 18px rgba(6,182,212,0.12);
+    }
+    h1{font-size:24px;margin:0}
+    p.lead{margin:0;color:rgba(230,238,248,0.8)}
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border-radius:10px;padding:14px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 6px 14px rgba(2,6,23,0.35);
+      display:flex;flex-direction:column;gap:8px;align-items:flex-start;
+      transition:transform .22s ease, box-shadow .22s ease;
+      cursor:pointer;
+    }
+    .card:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(2,6,23,0.5)}
+    .name{font-weight:700;font-size:18px;color:var(--text)}
+    .role{font-size:13px;color:rgba(230,238,248,0.7)}
+
+    footer{margin-top:20px;font-size:13px;color:rgba(230,238,248,0.65);text-align:right}
+
+    /* Modal */
+    .modal{
+      display:none;
+      position:fixed;
+      z-index:10;
+      left:0;top:0;
+      width:100%;height:100%;
+      background:rgba(0,0,0,0.7);
+      align-items:center;
+      justify-content:center;
+      backdrop-filter: blur(4px);
+    }
+    .modal-content{
+      background:var(--card);
+      padding:20px;
+      border-radius:10px;
+      max-width:400px;
+      width:90%;
+      position:relative;
+      color:var(--text);
+    }
+    .modal-content h2{margin-top:0}
+    .close{
+      position:absolute;
+      top:12px;
+      right:16px;
+      font-size:18px;
+      font-weight:bold;
+      cursor:pointer;
+      color:var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="watermark" aria-hidden="true">
+    <svg viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img">
+      <defs>
+        <linearGradient id="g" x1="0" x2="1">
+          <stop offset="0" stop-color="#06b6d4" />
+          <stop offset="1" stop-color="#7c3aed" />
+        </linearGradient>
+      </defs>
+      <text x="50%" y="52%" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="260" fill="url(#g)">LCG</text>
+    </svg>
+  </div>
+
+  <main class="container">
+    <header>
+      <div class="logo-badge">LCG</div>
+      <div>
+        <h1>LCG - Team Members</h1>
+        <p class="lead">Click on a name to know more about the team member.</p>
+      </div>
+    </header>
+
+    <section class="grid" aria-label="Team list">
+      <div class="card" onclick="openModal('Rudra Singh','A new but energetic guy loves all things and a bit famous. Born on 1 August 2011.')">
+        <div class="name">Rudra Singh</div>
+        <div class="role">Team Member</div>
+      </div>
+
+      <div class="card" onclick="openModal('Animesh Dubey','Old guy, good speaker ruling the system from 8 years. Born on 20 May 2011.')">
+        <div class="name">Animesh Dubey</div>
+        <div class="role">Team Member</div>
+      </div>
+
+      <div class="card" onclick="openModal('Ayush Raj','LCG founder, good at numericals, learning to speak. Born on 1 January 2011.')">
+        <div class="name">Ayush Raj</div>
+        <div class="role">Team Member</div>
+      </div>
+
+      <div class="card" onclick="openModal('Ayush Kumar Gautam','One of the good guys, chubby + cute + shy, god in FF and arguing. Born on 18 August 2010.')">
+        <div class="name">Ayush Kumar Gautam</div>
+        <div class="role">Team Member</div>
+      </div>
+
+      <div class="card" onclick="openModal('Aviral Maurya','Good in everyone\'s good books, one teacher favourite, technical guy.')">
+        <div class="name">Aviral Maurya</div>
+        <div class="role">Team Member</div>
+      </div>
+
+    </section>
+
+    <footer>Created for school work • LCG</footer>
+  </main>
+
+  <div class="modal" id="infoModal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalName"></h2>
+      <p id="modalDesc"></p>
+    </div>
+  </div>
+
+  <script>
+    function openModal(name, desc){
+      document.getElementById('modalName').textContent = name;
+      document.getElementById('modalDesc').textContent = desc;
+      document.getElementById('infoModal').style.display = 'flex';
+    }
+    function closeModal(){
+      document.getElementById('infoModal').style.display = 'none';
+    }
+    window.onclick = function(e){
+      if(e.target.id === 'infoModal') closeModal();
+    }
+  </script>
+</body>
+</html>
